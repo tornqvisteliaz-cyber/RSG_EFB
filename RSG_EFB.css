@@ -1,0 +1,1014 @@
+/**
+ * RSG EFB - Windows Classic OS Theme Styles
+ * Inspired by Windows 95/98/XP classic styling
+ */
+
+/* ============================================
+   GLOBAL RESET & BASE STYLES
+============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Tahoma', 'Arial', sans-serif;
+    font-size: 11px;
+    color: #000000;
+}
+
+/* ============================================
+   ROOT ELEMENT
+============================================ */
+rsg-efb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #008080;
+}
+
+/* ============================================
+   DESKTOP
+============================================ */
+#desktop {
+    width: 100%;
+    height: calc(100% - 30px);
+    position: relative;
+    background: linear-gradient(135deg, #008080 0%, #006666 50%, #004d4d 100%);
+    overflow: hidden;
+}
+
+/* ============================================
+   DESKTOP ICONS
+============================================ */
+.desktop-icon {
+    position: absolute;
+    width: 70px;
+    padding: 4px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.desktop-icon:hover {
+    background: rgba(0, 0, 128, 0.4);
+    border: 1px dotted #ffffff;
+}
+
+.desktop-icon:active {
+    background: rgba(0, 0, 128, 0.6);
+}
+
+.icon-image {
+    font-size: 32px;
+    margin-bottom: 2px;
+}
+
+.icon-label {
+    color: #ffffff;
+    font-size: 11px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#icon-flightplan { left: 10px; top: 10px; }
+#icon-weather { left: 10px; top: 90px; }
+#icon-checklist { left: 10px; top: 170px; }
+#icon-performance { left: 10px; top: 250px; }
+#icon-notepad { left: 10px; top: 330px; }
+#icon-settings { left: 10px; top: 410px; }
+
+/* ============================================
+   WINDOWS
+============================================ */
+.window {
+    position: absolute;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    min-width: 320px;
+    min-height: 200px;
+    display: none;
+}
+
+.window-titlebar {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #ffffff;
+    padding: 3px 4px;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: move;
+    user-select: none;
+}
+
+.window-icon {
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.window-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.window-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.window-controls button {
+    width: 16px;
+    height: 14px;
+    border: 1px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    background: #c0c0c0;
+    font-size: 10px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.window-controls button:hover {
+    background: #d0d0d0;
+}
+
+.window-controls button:active {
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.btn-close:hover {
+    background: #ff0000;
+    color: #ffffff;
+}
+
+.window-content {
+    background: #c0c0c0;
+    padding: 4px;
+    overflow: auto;
+    height: calc(100% - 26px);
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+/* Window positions */
+#window-flightplan { left: 100px; top: 50px; width: 380px; height: 280px; }
+#window-weather { left: 150px; top: 80px; width: 340px; height: 320px; }
+#window-checklist { left: 200px; top: 60px; width: 320px; height: 400px; }
+#window-performance { left: 300px; top: 100px; width: 360px; height: 380px; }
+#window-notepad { left: 250px; top: 120px; width: 420px; height: 320px; }
+#window-settings { left: 400px; top: 140px; width: 300px; height: 280px; }
+
+/* ============================================
+   FLIGHT PLAN WINDOW
+============================================ */
+.flight-plan-container {
+    height: 100%;
+}
+
+.fp-route-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: #000080;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    gap: 15px;
+}
+
+.fp-airport {
+    letter-spacing: 2px;
+}
+
+.fp-arrow {
+    font-size: 24px;
+    color: #ffff00;
+}
+
+.fp-route-info {
+    padding: 10px;
+    background: #ffffff;
+    margin: 8px;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.fp-waypoints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.wp {
+    background: #000080;
+    color: #ffffff;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.fp-details {
+    padding: 8px;
+}
+
+.fp-detail-row {
+    display: flex;
+    padding: 6px;
+    border-bottom: 1px solid #808080;
+}
+
+.fp-label {
+    width: 100px;
+    font-weight: bold;
+    color: #000080;
+}
+
+.fp-value {
+    flex: 1;
+}
+
+/* ============================================
+   WEATHER WINDOW
+============================================ */
+.weather-container {
+    height: 100%;
+}
+
+.weather-header {
+    background: #000080;
+    color: #ffffff;
+    padding: 8px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.weather-main {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+}
+
+.weather-wind, .weather-vis {
+    flex: 1;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 10px;
+    text-align: center;
+}
+
+.wind-label, .vis-label {
+    font-size: 10px;
+    color: #808080;
+    margin-bottom: 5px;
+}
+
+.wind-info, .vis-info {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000080;
+}
+
+.weather-clouds {
+    padding: 10px;
+    background: #ffffcc;
+    margin: 8px;
+    text-align: center;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.weather-temp-row {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+}
+
+.temp-box {
+    flex: 1;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 8px;
+    text-align: center;
+}
+
+.temp-label {
+    font-size: 10px;
+    color: #808080;
+    margin-bottom: 3px;
+}
+
+.temp-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000080;
+}
+
+.weather-metar {
+    padding: 10px;
+    background: #000000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    margin: 8px;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* ============================================
+   CHECKLIST WINDOW
+============================================ */
+.checklist-container {
+    height: 100%;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.checklist-section {
+    margin-bottom: 4px;
+}
+
+.checklist-header {
+    background: linear-gradient(90deg, #c0c0c0, #e0e0e0);
+    padding: 6px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.checklist-header:hover {
+    background: linear-gradient(90deg, #d0d0d0, #f0f0f0);
+}
+
+.ch-arrow {
+    font-size: 10px;
+}
+
+.checklist-items {
+    padding: 6px;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    border-top: none;
+}
+
+.checklist-item {
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checklist-item:hover {
+    background: #ffffcc;
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+.checklist-item label {
+    cursor: pointer;
+}
+
+/* ============================================
+   PERFORMANCE / FLIGHT INSTRUMENTS WINDOW
+============================================ */
+.performance-container {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.perf-section {
+    margin-bottom: 8px;
+}
+
+.perf-section-title {
+    background: #000080;
+    color: #ffffff;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.perf-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.perf-box {
+    flex: 1;
+    min-width: 80px;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 8px;
+    text-align: center;
+}
+
+.perf-box.wide {
+    flex: 1 1 100%;
+}
+
+.perf-box .perf-label {
+    font-size: 10px;
+    color: #808080;
+    margin-bottom: 2px;
+}
+
+.perf-box .perf-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000080;
+    font-family: 'Courier New', monospace;
+}
+
+.perf-box .perf-unit {
+    font-size: 9px;
+    color: #808080;
+}
+
+/* ============================================
+   NOTEPAD WINDOW
+============================================ */
+.notepad-menubar {
+    display: flex;
+    gap: 12px;
+    padding: 4px 8px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    border-bottom: none;
+}
+
+.notepad-menubar span {
+    cursor: pointer;
+    padding: 2px 6px;
+}
+
+.notepad-menubar span:hover {
+    background: #000080;
+    color: #ffffff;
+}
+
+.notepad-textarea {
+    width: 100%;
+    height: calc(100% - 28px);
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    resize: none;
+    background: #ffffff;
+    color: #000000;
+}
+
+/* ============================================
+   SETTINGS WINDOW
+============================================ */
+.settings-container {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.settings-group {
+    margin-bottom: 12px;
+}
+
+.settings-title {
+    background: #000080;
+    color: #ffffff;
+    padding: 4px 8px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.settings-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    margin-bottom: 4px;
+}
+
+.settings-item span {
+    width: 80px;
+}
+
+.settings-item select,
+.settings-item input[type="range"] {
+    flex: 1;
+}
+
+.about-text {
+    padding: 10px;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    line-height: 1.6;
+}
+
+/* ============================================
+   START MENU
+============================================ */
+#start-menu {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 200px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: none;
+}
+
+.start-menu-header {
+    background: linear-gradient(180deg, #000080, #1084d0);
+    color: #ffffff;
+    padding: 20px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    border-bottom: 2px solid #000000;
+}
+
+.start-menu-items {
+    padding: 4px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.menu-item:hover {
+    background: #000080;
+    color: #ffffff;
+}
+
+.menu-icon {
+    font-size: 16px;
+    width: 24px;
+    text-align: center;
+}
+
+.menu-separator {
+    height: 2px;
+    background: #808080;
+    margin: 4px 0;
+    border-bottom: 1px solid #ffffff;
+}
+
+/* ============================================
+   TASKBAR
+============================================ */
+#taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    gap: 4px;
+}
+
+#start-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 11px;
+    height: 24px;
+}
+
+#start-button:hover {
+    background: #d0d0d0;
+}
+
+#start-button.active {
+    background: #000080;
+    color: #ffffff;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.start-icon {
+    font-size: 14px;
+}
+
+.taskbar-separator {
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to right, #808080, #ffffff);
+}
+
+.taskbar-spacer {
+    flex: 1;
+}
+
+.taskbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    cursor: pointer;
+    font-size: 11px;
+    height: 24px;
+    max-width: 120px;
+}
+
+.taskbar-btn span:first-child {
+    font-size: 12px;
+}
+
+.taskbar-btn span:last-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.taskbar-btn:hover {
+    background: #d0d0d0;
+}
+
+.taskbar-btn.active {
+    background: #000080;
+    color: #ffffff;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+#system-tray {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 2px 8px;
+    height: 24px;
+}
+
+.tray-icons {
+    display: flex;
+    gap: 4px;
+}
+
+.tray-icon {
+    font-size: 12px;
+}
+
+#taskbar-clock {
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0 4px;
+    border-left: 1px solid #808080;
+}
+
+/* ============================================
+   SCROLLBAR STYLING (Windows Classic)
+============================================ */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border: 1px solid #808080;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d0d0d0;
+}
+
+::-webkit-scrollbar-button {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    width: 16px;
+    height: 16px;
+}
+
+/* ============================================
+   ANIMATIONS
+============================================ */
+@keyframes windowOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.window {
+    animation: windowOpen 0.15s ease-out;
+}
+
+/* ============================================
+   UTILITY CLASSES
+============================================ */
+.hidden {
+    display: none !important;
+}
+
+.focused {
+    border: 2px solid #000080 !important;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+============================================ */
+@media (max-width: 800px) {
+    .perf-box {
+        min-width: 60px;
+    }
+    
+    .perf-box .perf-value {
+        font-size: 16px;
+    }
+    
+    #window-performance {
+        width: 300px;
+    }
+}
+
+/* ============================================
+   SIMVAR-DRIVEN ELEMENT STYLES (v2.0)
+   All values updated at 10 Hz from MSFS 2024 SDK
+============================================ */
+
+/* Performance section title banner */
+.perf-section-title {
+    background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-bottom: 1px solid #000080;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    user-select: none;
+}
+
+/* Checklist live status bar (SimVar: gear / flaps / engine) */
+.checklist-status-bar {
+    display: flex;
+    gap: 16px;
+    background: linear-gradient(90deg, #d4d0c8 0%, #e8e4d8 100%);
+    border-bottom: 1px solid #808080;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+}
+
+.checklist-status-bar strong {
+    color: #000080;
+    font-weight: bold;
+}
+
+/* Weather "LIVE" badge */
+.weather-live-badge {
+    color: #00cc00;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 1px 4px;
+    border: 1px solid #00cc00;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Weather temp boxes row */
+.weather-temp-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.temp-box {
+    flex: 1;
+    background: #e8e4d8;
+    border: 1px solid #808080;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    padding: 6px 8px;
+    border-radius: 1px;
+    text-align: center;
+}
+
+.temp-box .temp-label {
+    display: block;
+    font-size: 9px;
+    color: #444444;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.temp-box .temp-value {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000080;
+    font-family: 'Courier New', monospace;
+}
+
+/* Weather clouds row */
+.weather-clouds {
+    font-size: 11px;
+    color: #444444;
+    padding: 4px 0;
+    border-bottom: 1px solid #808080;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
+/* Weather temp/main row */
+.weather-temp-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* Weather label value layout */
+.weather-main {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 6px 0;
+    border-bottom: 1px solid #808080;
+    margin-bottom: 6px;
+}
+
+.weather-wind, .weather-vis {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.weather-label {
+    font-size: 10px;
+    color: #555555;
+    text-transform: uppercase;
+}
+
+.weather-value {
+    font-size: 13px;
+    font-weight: bold;
+    color: #000080;
+    font-family: 'Courier New', monospace;
+}
+
+/* Weather container padding */
+.weather-container {
+    padding: 8px 10px;
+}
+
+.weather-terminal {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #808080;
+    padding-bottom: 6px;
+}
+
+/* Flight plan detail label/value row */
+.fp-detail-row {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    padding: 3px 0;
+}
+
+.fp-detail-label {
+    font-size: 10px;
+    color: #555555;
+    text-transform: uppercase;
+    min-width: 36px;
+}
+
+.fp-detail-value {
+    font-size: 13px;
+    font-weight: bold;
+    color: #000080;
+    font-family: 'Courier New', monospace;
+}
+
+/* Settings group */
+.settings-group {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #808080;
+}
+
+.settings-group-title {
+    font-size: 11px;
+    font-weight: bold;
+    color: #000080;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 3px 0;
+}
+
+.settings-item span:first-child {
+    color: #555555;
+}
+
+.settings-item span:last-child {
+    color: #000080;
+    font-weight: bold;
+}
+
+.about-text {
+    font-size: 11px;
+    line-height: 1.8;
+    color: #000000;
+}
+
+/* ============================================
+   PRINT STYLES
+============================================ */
+@media print {
+    #taskbar, #start-menu {
+        display: none !important;
+    }
+
+    .window {
+        position: relative;
+        page-break-inside: avoid;
+    }
+}

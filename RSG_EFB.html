@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RSG EFB - WinFlight OS</title>
+</head>
+<body>
+<rsg-efb>
+    <div id="desktop">
+
+        <!-- Desktop Icons -->
+        <div class="desktop-icon" ondblclick="openWindow('flightplan')">
+            <div class="icon-image">🗺️</div>
+            <div class="icon-label">Flight Plan</div>
+        </div>
+        <div class="desktop-icon" ondblclick="openWindow('weather')">
+            <div class="icon-image">🌤️</div>
+            <div class="icon-label">Weather</div>
+        </div>
+        <div class="desktop-icon" ondblclick="openWindow('checklist')">
+            <div class="icon-image">✓</div>
+            <div class="icon-label">Checklist</div>
+        </div>
+        <div class="desktop-icon" ondblclick="openWindow('performance')">
+            <div class="icon-image">📊</div>
+            <div class="icon-label">Performance</div>
+        </div>
+        <div class="desktop-icon" ondblclick="openWindow('notepad')">
+            <div class="icon-image">📄</div>
+            <div class="icon-label">Notepad</div>
+        </div>
+        <div class="desktop-icon" ondblclick="openWindow('settings')">
+            <div class="icon-image">⚙</div>
+            <div class="icon-label">Settings</div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             WINDOW: FLIGHT PLAN  (SimVar: Lat/Lon/Alt/Speed)
+             ══════════════════════════════════════════════ -->
+        <div class="window" id="window-flightplan">
+            <div class="window-title" >
+                <span class="window-icon">🗺️</span>
+                <span class="window-title-text">Flight Plan</span>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-min"  onclick="minimizeWindow('flightplan')" title="Minimize">_</button>
+                    <button class="win-btn win-btn-max"  onclick="maximizeWindow('flightplan')"  title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="closeWindow('flightplan')"     title="Close">✕</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="flight-plan-container">
+                    <div class="fp-route-header">
+                        <span class="fp-route-title">ACTIVE FLIGHT PLAN</span>
+                        <span class="fp-route-callsign">RSG-123</span>
+                    </div>
+                    <div class="fp-route-info">
+                        <span class="fp-dep">KEWR</span>
+                        <span class="fp-arrow">→</span>
+                        <span class="fp-arr">KLAX</span>
+                    </div>
+                    <div class="fp-waypoints">
+                        <div class="fp-wpt fp-wpt-header">
+                            <span>WAYPOINT</span><span>BRG</span><span>DIST</span>
+                        </div>
+                        <div class="fp-wpt"><span>KEWR</span><span>—</span><span>0 NM</span></div>
+                        <div class="fp-wpt"><span>J150</span><span>277°</span><span>85 NM</span></div>
+                        <div class="fp-wpt"><span>N90</span><span>270°</span><span>150 NM</span></div>
+                        <div class="fp-wpt"><span>STOLI</span><span>265°</span><span>215 NM</span></div>
+                        <div class="fp-wpt"><span>KLAX</span><span>262°</span><span>245 NM</span></div>
+                    </div>
+                    <div class="fp-details">
+                        <div class="fp-detail-row">
+                            <span class="fp-detail-label">GS:</span>
+                            <span class="fp-detail-value" id="fp-gs">—</span>
+                        </div>
+                        <div class="fp-detail-row">
+                            <span class="fp-detail-label">IAS:</span>
+                            <span class="fp-detail-value" id="fp-speed">—</span>
+                        </div>
+                        <div class="fp-detail-row">
+                            <span class="fp-detail-label">ALT:</span>
+                            <span class="fp-detail-value" id="fp-altitude">—</span>
+                        </div>
+                        <div class="fp-detail-row">
+                            <span class="fp-detail-label">HDG:</span>
+                            <span class="fp-detail-value" id="fp-hdg">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             WINDOW: WEATHER  (SimVars: OAT/Wind/Vis/Baro)
+             ══════════════════════════════════════════════ -->
+        <div class="window" id="window-weather">
+            <div class="window-title" >
+                <span class="window-icon">🌤️</span>
+                <span class="window-title-text">Weather</span>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-min"  onclick="minimizeWindow('weather')" title="Minimize">_</button>
+                    <button class="win-btn win-btn-max"  onclick="maximizeWindow('weather')"  title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="closeWindow('weather')"     title="Close">✕</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="weather-container">
+                    <div class="weather-terminal">
+                        <span>Terminal: KEWR</span>
+                        <span class="weather-live-badge">● LIVE</span>
+                    </div>
+                    <div class="weather-main">
+                        <div class="weather-wind">
+                            <span class="weather-label">Wind:</span>
+                            <span class="weather-value" id="weather-wind-value">—</span>
+                        </div>
+                        <div class="weather-vis">
+                            <span class="weather-label">Visibility:</span>
+                            <span class="weather-value" id="weather-vis-value">—</span>
+                        </div>
+                    </div>
+                    <div class="weather-clouds">
+                        Few clouds at 25,000 ft
+                    </div>
+                    <div class="weather-temp-row">
+                        <div class="temp-box">
+                            <span class="temp-label">OAT</span>
+                            <span class="temp-value" id="weather-oat-value">—</span>
+                        </div>
+                        <div class="temp-box">
+                            <span class="temp-label">Dewpoint</span>
+                            <span class="temp-value" id="weather-dewp-value">—</span>
+                        </div>
+                        <div class="temp-box">
+                            <span class="temp-label">Baroset</span>
+                            <span class="temp-value" id="weather-baroset-value">—</span>
+                        </div>
+                    </div>
+                    <div class="weather-temp-row">
+                        <div class="temp-box">
+                            <span class="temp-label">Temp</span>
+                            <span class="temp-value" id="weather-temp-value">—</span>
+                        </div>
+                        <div class="temp-box">
+                            <span class="temp-label">Amb. Press</span>
+                            <span class="temp-value" id="weather-ambpres-value">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             WINDOW: CHECKLIST  (SimVars: Gear/Flaps/Engine)
+             ══════════════════════════════════════════════ -->
+        <div class="window" id="window-checklist">
+            <div class="window-title" >
+                <span class="window-icon">✓</span>
+                <span class="window-title-text">Checklist</span>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-min"  onclick="minimizeWindow('checklist')" title="Minimize">_</button>
+                    <button class="win-btn win-btn-max"  onclick="maximizeWindow('checklist')"  title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="closeWindow('checklist')"     title="Close">✕</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <!-- Live system status bar -->
+                <div class="checklist-status-bar">
+                    <span>GEAR: <strong id="checklist-gear">—</strong></span>
+                    <span>FLAPS: <strong id="checklist-flaps">—</strong></span>
+                    <span>ENG: <strong id="checklist-engine">—</strong></span>
+                </div>
+                <div id="checklist-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             WINDOW: PERFORMANCE  (All key SimVars)
+             ══════════════════════════════════════════════ -->
+        <div class="window" id="window-performance">
+            <div class="window-title" >
+                <span class="window-icon">📊</span>
+                <span class="window-title-text">Performance</span>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-min"  onclick="minimizeWindow('performance')" title="Minimize">_</button>
+                    <button class="win-btn win-btn-max"  onclick="maximizeWindow('performance')"  title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="closeWindow('performance')"     title="Close">✕</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="performance-container">
+
+                    <!-- Live Data -->
+                    <div class="perf-section">
+                        <div class="perf-section-title">— FLIGHT DATA —</div>
+                        <div class="perf-grid">
+                            <div class="perf-box">
+                                <div class="perf-label">IAS</div>
+                                <div class="perf-value" id="perf-speed">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">TAS</div>
+                                <div class="perf-value" id="perf-tas">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Mach</div>
+                                <div class="perf-value" id="perf-mach">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">GS</div>
+                                <div class="perf-value" id="perf-gs">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Altitude</div>
+                                <div class="perf-value" id="perf-alt">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Alt AGL</div>
+                                <div class="perf-value" id="perf-alt-true">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">V/S</div>
+                                <div class="perf-value" id="perf-vs">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Heading</div>
+                                <div class="perf-value" id="perf-hdg">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">HDG (True)</div>
+                                <div class="perf-value" id="perf-hdg-t">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Position -->
+                    <div class="perf-section">
+                        <div class="perf-section-title">— POSITION —</div>
+                        <div class="perf-grid">
+                            <div class="perf-box wide">
+                                <div class="perf-label">Latitude</div>
+                                <div class="perf-value" id="perf-lat">—</div>
+                            </div>
+                            <div class="perf-box wide">
+                                <div class="perf-label">Longitude</div>
+                                <div class="perf-value" id="perf-lon">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Engine -->
+                    <div class="perf-section">
+                        <div class="perf-section-title">— ENGINE —</div>
+                        <div class="perf-grid">
+                            <div class="perf-box">
+                                <div class="perf-label">N1 %</div>
+                                <div class="perf-value" id="perf-n1">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">RPM</div>
+                                <div class="perf-value" id="perf-rpm">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Fuel Flow</div>
+                                <div class="perf-value" id="perf-ff">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fuel -->
+                    <div class="perf-section">
+                        <div class="perf-section-title">— FUEL —</div>
+                        <div class="perf-grid">
+                            <div class="perf-box">
+                                <div class="perf-label">Fuel (lbs)</div>
+                                <div class="perf-value" id="perf-fuel-lbs">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Fuel (gal)</div>
+                                <div class="perf-value" id="perf-fuel-gal">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Autopilot -->
+                    <div class="perf-section">
+                        <div class="perf-section-title">— AUTOPILOT —</div>
+                        <div class="perf-grid">
+                            <div class="perf-box">
+                                <div class="perf-label">AP</div>
+                                <div class="perf-value" id="perf-ap">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">AP HDG</div>
+                                <div class="perf-value" id="perf-ap-hdg">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">AP ALT</div>
+                                <div class="perf-value" id="perf-ap-alt">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather -->
+                    <div class="perf-section">
+                        <div class="perf-section-title">— WEATHER —</div>
+                        <div class="perf-grid">
+                            <div class="perf-box">
+                                <div class="perf-label">OAT</div>
+                                <div class="perf-value" id="perf-oat">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Wind</div>
+                                <div class="perf-value" id="perf-wind">—</div>
+                            </div>
+                            <div class="perf-box">
+                                <div class="perf-label">Visibility</div>
+                                <div class="perf-value" id="perf-vis">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             WINDOW: NOTEPAD
+             ══════════════════════════════════════════════ -->
+        <div class="window" id="window-notepad">
+            <div class="window-title" >
+                <span class="window-icon">📄</span>
+                <span class="window-title-text">Notepad</span>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-min"  onclick="minimizeWindow('notepad')" title="Minimize">_</button>
+                    <button class="win-btn win-btn-max"  onclick="maximizeWindow('notepad')"  title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="closeWindow('notepad')"     title="Close">✕</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="notepad-menubar">
+                    <span>File</span>
+                    <span>Edit</span>
+                    <span>View</span>
+                    <span>Help</span>
+                </div>
+                <textarea class="notepad-textarea" spellcheck="false">
+ROUTE: KEWR -> KLAX
+Aircraft: B737-800 (EFB Live Data Active)
+
+FLIGHT PLAN:
+- Departed KEWR Runway 22R
+- Climb via J150 departure
+- Cruise FL350
+- Expect runway 25L at LAX
+
+REMARKS:
+Clear weather, smooth ride.
+
+ATC FREQUENCIES:
+KEWR Tower: 118.30
+N90: 126.20
+LAX Approach: 133.90
+
+NOTES:
+All data driven by MSFS 2024 SimVars.
+EFB Refresh Rate: 10 Hz (100 ms)
+---
+                </textarea>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             WINDOW: SETTINGS
+             ══════════════════════════════════════════════ -->
+        <div class="window" id="window-settings">
+            <div class="window-title" >
+                <span class="window-icon">⚙</span>
+                <span class="window-title-text">Settings</span>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-min"  onclick="minimizeWindow('settings')" title="Minimize">_</button>
+                    <button class="win-btn win-btn-max"  onclick="maximizeWindow('settings')"  title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="closeWindow('settings')"     title="Close">✕</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="settings-container">
+                    <div class="settings-group">
+                        <div class="settings-group-title">Display</div>
+                        <div class="settings-item">
+                            <span>Theme:</span>
+                            <span>Windows Classic (teal)</span>
+                        </div>
+                        <div class="settings-item">
+                            <span>Brightness:</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                    <div class="settings-group">
+                        <div class="settings-group-title">Data Source</div>
+                        <div class="settings-item">
+                            <span>SimVars:</span>
+                            <span>MSFS 2024 SDK</span>
+                        </div>
+                        <div class="settings-item">
+                            <span>Update Rate:</span>
+                            <span>10 Hz</span>
+                        </div>
+                    </div>
+                    <div class="settings-group">
+                        <div class="settings-group-title">About</div>
+                        <div class="about-text">
+                            RSG EFB v2.0 — SimVar Edition<br>
+                            MSFS 2024 Compatible<br>
+                            Windows Classic Theme<br>
+                            <br>
+                            SimVars sourced from:<br>
+                            docs.flightsimulator.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- START MENU -->
+        <div id="start-menu">
+            <div class="start-menu-header">
+                <span>RSG EFB</span>
+            </div>
+            <div class="start-menu-items">
+                <div class="start-menu-item" onclick="openWindow('flightplan'); hideStartMenu();">
+                    <span class="menu-icon">🗺️</span>
+                    <span>Flight Plan</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('weather'); hideStartMenu();">
+                    <span class="menu-icon">🌤️</span>
+                    <span>Weather</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('checklist'); hideStartMenu();">
+                    <span class="menu-icon">✓</span>
+                    <span>Checklist</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('performance'); hideStartMenu();">
+                    <span class="menu-icon">📊</span>
+                    <span>Performance</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('notepad'); hideStartMenu();">
+                    <span class="menu-icon">📄</span>
+                    <span>Notepad</span>
+                </div>
+                <div class="menu-separator"></div>
+                <div class="start-menu-item" onclick="openWindow('settings'); hideStartMenu();">
+                    <span class="menu-icon">⚙</span>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TASKBAR -->
+    <div id="taskbar">
+        <button id="start-button" class="taskbar-start" onclick="toggleStartMenu()">
+            <span class="start-icon">🪟</span>
+            <span>Start</span>
+        </button>
+
+        <div class="taskbar-separator"></div>
+
+        <button id="task-flightplan" class="taskbar-task" onclick="toggleTaskbarWindow('flightplan')">
+            <span>🗺️</span>
+            <span>Flight Plan</span>
+        </button>
+
+        <button id="task-weather" class="taskbar-task" onclick="toggleTaskbarWindow('weather')">
+            <span>🌤️</span>
+            <span>Weather</span>
+        </button>
+
+        <button id="task-checklist" class="taskbar-task" onclick="toggleTaskbarWindow('checklist')">
+            <span>✓</span>
+            <span>Checklist</span>
+        </button>
+
+        <button id="task-performance" class="taskbar-task" onclick="toggleTaskbarWindow('performance')">
+            <span>📊</span>
+            <span>Performance</span>
+        </button>
+
+        <button id="task-notepad" class="taskbar-task" onclick="toggleTaskbarWindow('notepad')">
+            <span>📄</span>
+            <span>Notepad</span>
+        </button>
+
+        <div class="taskbar-spacer"></div>
+
+        <div id="system-tray">
+            <div class="tray-icons">
+                <span class="tray-icon">📡</span>
+                <span class="tray-icon">🛰️</span>
+            </div>
+            <div id="taskbar-clock">00:00:00</div>
+        </div>
+    </div>
+</rsg-efb>
+
+<script src="RSG_EFB.js"></script>
+</body>
+</html>
